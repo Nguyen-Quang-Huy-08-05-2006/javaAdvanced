@@ -1,0 +1,15 @@
+1. Kiểm tra xem User có phải Admin hay không  
+→ Predicate<User>  
+Vì Predicate dùng để kiểm tra điều kiện và trả về kết quả boolean (true/false).
+
+2. Chuyển đổi đối tượng User thành chuỗi String chứa username  
+→ Function<User, String>  
+Vì Function dùng để biến đổi dữ liệu từ một kiểu sang kiểu khác (User → String).
+
+3. In thông tin chi tiết của User ra Console  
+→ Consumer<User>  
+Vì Consumer nhận dữ liệu vào để xử lý nhưng không trả về kết quả.
+
+4. Khởi tạo một đối tượng User mới với giá trị mặc định  
+→ Supplier<User>  
+Vì Supplier dùng để tạo và cung cấp một đối tượng mới mà không cần tham số đầu vào.
