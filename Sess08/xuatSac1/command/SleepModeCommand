@@ -1,0 +1,17 @@
+package Sess08.xuatSac1.command;
+
+import java.util.*;
+
+class SleepModeCommand implements Command {
+    private List<Command> commands = new ArrayList<>();
+
+    public void addCommand(Command c) {
+        commands.add(c);
+    }
+
+    public void execute() {
+        for (Command c : commands) {
+            c.execute();
+        }
+    }
+}
