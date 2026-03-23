@@ -97,7 +97,7 @@ public class Intersection implements Subject {
         boolean isGreen = "GREEN".equals(currentState.getColor());
 
         boolean hasPriority = waitingQueue.stream()
-                .anyMatch(v -> v instanceof PriorityVehicle);
+                .anyMatch(v -> DBContext instanceof PriorityVehicle);
 
         if (!hasPriority && waitingQueue.peek() == vehicle && isGreen) {
 

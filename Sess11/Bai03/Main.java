@@ -4,7 +4,7 @@ public class Main {
     public static void main(String[] args) {
         BedDAO dao = new BedDAO();
 
-        dao.updateBedStatus(1); // tồn tại
-        dao.updateBedStatus(999); // không tồn tại
+        dao.updateBedStatus(1);
+        dao.updateBedStatus(999); 
     }
 }

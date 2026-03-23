@@ -44,9 +44,9 @@ public class DoctorDAO {
             System.out.println("✔ Thêm bác sĩ thành công!");
 
         } catch (SQLIntegrityConstraintViolationException e) {
-            System.out.println("❌ Trùng mã bác sĩ!");
+            System.out.println("Trùng mã bác sĩ!");
         } catch (SQLException e) {
-            System.out.println("❌ Lỗi dữ liệu!");
+            System.out.println("Lỗi dữ liệu!");
         }
     }
 
