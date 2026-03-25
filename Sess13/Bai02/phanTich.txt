@@ -1,0 +1,13 @@
+Khi đã tắt Auto-Commit (conn.setAutoCommit(false)), các câu lệnh SQL sẽ nằm trong một transaction chưa được commit ngay.
+
+Trong trường hợp xảy ra lỗi ở bước 2:
+ - Transaction chưa được commit nên dữ liệu chưa được lưu chính thức.
+ - Tuy nhiên, do không có lệnh rollback(), transaction vẫn đang "mở" và giữ trạng thái chưa hoàn tất.
+
+Việc chỉ dùng System.out.println() để in lỗi là vi phạm nguyên tắc Transaction vì:
+ - Không giải phóng transaction đang dang dở
+ - Không đưa dữ liệu về trạng thái ban đầu
+ - Có thể gây lock dữ liệu hoặc treo kết nối
+
+Hành động bị thiếu:
+=> Phải gọi conn.rollback() khi xảy ra SQLException để hủy toàn bộ transaction.

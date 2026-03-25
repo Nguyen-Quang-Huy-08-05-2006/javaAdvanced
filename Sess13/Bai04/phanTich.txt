@@ -1,0 +1,38 @@
+1. PHÂN TÍCH INPUT / OUTPUT
+
+Input:
+Không có tham số hoặc có thể có filter (ngày, khoa...)
+
+Output:
+List<BenhNhanDTO>
+- maBenhNhan (int)
+- tenBenhNhan (String)
+- List<DichVu> dsDichVu
+
+Yêu cầu:
+- Hiển thị đầy đủ tất cả bệnh nhân
+- Không bỏ sót bệnh nhân chưa có dịch vụ
+- Thời gian xử lý < 1 giây với ~500 bệnh nhân
+
+2. ĐỀ XUẤT GIẢI PHÁP
+Giải pháp 1: N+1 Query
+- Query danh sách bệnh nhân
+- Với mỗi bệnh nhân → query danh sách dịch vụ riêng
+
+Giải pháp 2: JOIN
+- Dùng LEFT JOIN giữa BenhNhan và DichVuSuDung
+- Lấy toàn bộ dữ liệu trong 1 query duy nhất
+
+3. SO SÁNH
+| Tiêu chí    | N+1 Query       | JOIN       |
+| ----------- | --------------- | ---------- |
+| Số query    | Rất nhiều (N+1) | 1          |
+| Hiệu năng   | Rất chậm        | Nhanh      |
+| RAM Java    | Thấp            | Trung bình |
+| Độ phức tạp | Dễ              | Trung bình |
+
+4. LỰA CHỌN
+Chọn giải pháp JOIN vì:
+- Giảm số lượng query xuống 1
+- Tăng hiệu năng đáng kể
+- Đáp ứng yêu cầu < 1 giây

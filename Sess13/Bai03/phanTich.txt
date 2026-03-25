@@ -1,0 +1,47 @@
+[BÀI TẬP] XUẤT VIỆN VÀ THANH TOÁN
+
+
+1. PHÂN TÍCH I/O
+
+
+Input:
+
+- maBenhNhan (int): Mã bệnh nhân
+- tienVienPhi (double): Số tiền cần thanh toán
+
+Output:
+
+- Thông báo thành công: "Xuất viện và thanh toán thành công"
+- Thông báo thất bại: lỗi nghiệp vụ hoặc lỗi hệ thống
+
+2. ĐỀ XUẤT GIẢI PHÁP
+
+- Sử dụng JDBC Connection và tắt Auto-Commit (setAutoCommit(false))
+- Gom 3 thao tác vào cùng một transaction
+- Nếu tất cả thành công → commit()
+- Nếu có lỗi → rollback()
+
+Xử lý bẫy:
+
+* Bẫy 1 (Thiếu tiền):
+
+  - Kiểm tra số dư trước khi trừ
+  - Nếu không đủ → throw Exception → rollback
+
+* Bẫy 2 (Row Affected = 0):
+
+  - Sau mỗi executeUpdate(), kiểm tra kết quả trả về
+  - Nếu = 0 → throw Exception → rollback
+
+3. CÁC BƯỚC XỬ LÝ
+   1. Mở kết nối DB
+   2. Tắt Auto-Commit
+   3. Lấy số dư bệnh nhân
+   4. Kiểm tra đủ tiền (Bẫy 1)
+   5. Trừ tiền
+   6. Giải phóng giường
+   7. Cập nhật trạng thái bệnh nhân
+   8. Kiểm tra row affected (Bẫy 2)
+   9. Commit nếu tất cả OK
+   10. Rollback nếu có lỗi
+   11. Đóng kết nối

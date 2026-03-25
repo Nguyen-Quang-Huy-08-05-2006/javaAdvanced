@@ -1,0 +1,21 @@
+PHÂN TÍCH RỦI RO
+
+1. Nhập sai dữ liệu đầu vào
+* Người dùng nhập chữ vào ô tiền (ví dụ: "Năm trăm")
+  => Gây NumberFormatException → crash chương trình nếu không validate
+
+2. Chọn giường không tồn tại hoặc đã có người
+* UPDATE không tác động dòng nào (row = 0)
+  => Nếu vẫn commit → dữ liệu sai (có bệnh nhân nhưng không có giường)
+
+3. Lỗi giữa transaction (mất mạng / SQL lỗi)
+* Đã thêm bệnh nhân nhưng chưa cập nhật giường hoặc tài chính
+  => Nếu không rollback → dữ liệu không nhất quán
+
+4. Nhập tiền âm hoặc = 0
+   => Gây sai logic nghiệp vụ
+
+5. Lỗi concurrent (2 người chọn cùng 1 giường)
+   => Có thể bị ghi đè nếu không check trạng thái giường
+
+=> Kết luận: Bắt buộc phải dùng Transaction + Validate input + check row affected

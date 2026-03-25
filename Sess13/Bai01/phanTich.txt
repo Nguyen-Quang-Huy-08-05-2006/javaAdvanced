@@ -1,0 +1,9 @@
+Trong JDBC, chế độ mặc định là Auto-Commit = true, nghĩa là mỗi câu lệnh SQL sau khi thực thi sẽ được commit ngay lập tức như một transaction độc lập.
+
+Trong đoạn code:
+- Câu lệnh UPDATE trừ thuốc được thực thi và commit ngay → dữ liệu đã được ghi vĩnh viễn vào database.
+- Sau đó xảy ra lỗi (10 / 0) khiến chương trình dừng lại.
+- Câu lệnh INSERT không được thực hiện.
+Do mỗi câu lệnh là một transaction riêng biệt, nên khi lỗi xảy ra, hệ thống không thể rollback lại thao tác trước đó.
+
+=> Kết quả: Thuốc vẫn bị trừ nhưng không có lịch sử ghi nhận, vi phạm tính Atomicity của transaction.
